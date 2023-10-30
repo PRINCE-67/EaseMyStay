@@ -36,6 +36,10 @@ public class Customer {
 	@OneToMany(fetch = FetchType.LAZY ,cascade = CascadeType.ALL ,mappedBy = "customer")
 	@JsonIgnore
 	private List<Hotel> hotels;
+	
+	@OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL )
+	@JsonIgnore
+	private Admin admin;
 
 	public String getCustomerName() {
 		return customerName;
@@ -86,6 +90,15 @@ public class Customer {
 	}
 
 	
+	
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
 	public Customer(long customerId, String customerName, long customerPhoneNum, String customerEmail,
 			List<Reservation> reservation, List<Hotel> hotels) {
 		super();
@@ -106,7 +119,7 @@ public class Customer {
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPhoneNum="
 				+ customerPhoneNum + ", customerEmail=" + customerEmail + ", reservation=" + reservation + ", hotels="
-				+ hotels + ", admin=" + "]";
+				+ hotels + ", admin=" + admin + "]";
 	}
 	
 	

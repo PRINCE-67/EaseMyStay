@@ -34,6 +34,14 @@ public class Hotel {
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hotel")
 	@JsonIgnore
 	private List<Room> rooms;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Admin admin;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Owner owner;
 
 	private String contactNumber;
 	
@@ -109,6 +117,22 @@ public class Hotel {
 
 	
 
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
+	}
+
 	public Hotel(long hotelId, String hotelName, float rating, Customer customer,
 			List<Room> rooms, String contactNumber, String hotelEmail, String hotelAddress) {
 		super();
@@ -129,8 +153,8 @@ public class Hotel {
 
 	@Override
 	public String toString() {
-		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", rating=" + rating + ", owner="
-				+ ", customer=" + customer + ", admin=" + ", rooms=" + rooms + ", contactNumber="
+		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", rating=" + rating + ", customer="
+				+ customer + ", rooms=" + rooms + ", admin=" + admin + ", owner=" + owner + ", contactNumber="
 				+ contactNumber + ", hotelEmail=" + hotelEmail + ", hotelAddress=" + hotelAddress + "]";
 	}
 
