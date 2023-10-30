@@ -1,11 +1,14 @@
 package com.fil.mmproject.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -16,14 +19,19 @@ public class Room {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long roomId;
+
 	private double price;
+
 	private String roomType;
+
 	private int roomNum;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Hotel hotel;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Reservation reservation;
 
 	public long getRoomId() {
@@ -74,16 +82,13 @@ public class Room {
 		this.reservation = reservation;
 	}
 
-	
-
-	public Room(long roomId, double price, String roomType, int roomNum, Hotel hotel, Reservation reservation) {
+	public Room(long roomId, double price, String roomType, int roomNum, Hotel hotel) {
 		super();
 		this.roomId = roomId;
 		this.price = price;
 		this.roomType = roomType;
 		this.roomNum = roomNum;
 		this.hotel = hotel;
-		this.reservation = reservation;
 	}
 
 	public Room() {
@@ -94,7 +99,7 @@ public class Room {
 	@Override
 	public String toString() {
 		return "Room [roomId=" + roomId + ", price=" + price + ", roomType=" + roomType + ", roomNum=" + roomNum
-				+ ", hotel=" + hotel + ", reservation=" + reservation + "]";
+				+ ", hotel=" + hotel + "]";
 	}
 
 }

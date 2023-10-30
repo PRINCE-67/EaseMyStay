@@ -2,6 +2,8 @@ package com.fil.mmproject.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,25 +22,26 @@ public class Hotel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long hotelId;
-	
+
 	private String hotelName;
 
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private Owner owner;
-	
 	private float rating;
 
-	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Customer customer;
 
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	private Admin admin;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "hotel")
+	@JsonIgnore
+	private List<Room> rooms;
 
-	@OneToMany(fetch = FetchType.LAZY ,cascade = CascadeType.ALL ,mappedBy = "hotel")
-	private List<Room> room;
-
-	@OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL ,mappedBy = "hotel")
-	private HotelInformation hotelInfo;
+	private String contactNumber;
+	
+	private String hotelEmail;
+	
+	private String hotelAddress;
+	
+	
 
 	public long getHotelId() {
 		return hotelId;
@@ -56,12 +59,12 @@ public class Hotel {
 		this.hotelName = hotelName;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public float getRating() {
+		return rating;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
 
 	public Customer getCustomer() {
@@ -72,53 +75,51 @@ public class Hotel {
 		this.customer = customer;
 	}
 
-	public Owner getOwner() {
-		return owner;
+	public List<Room> getRooms() {
+		return rooms;
 	}
 
-	public void setOwner(Owner owner) {
-		this.owner = owner;
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
 	}
 
-	public float getRating() {
-		return rating;
+	public String getContactNumber() {
+		return contactNumber;
 	}
 
-	public void setRating(float rating) {
-		this.rating = rating;
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getHotelEmail() {
+		return hotelEmail;
+	}
+
+	public void setHotelEmail(String hotelEmail) {
+		this.hotelEmail = hotelEmail;
+	}
+
+	public String getHotelAddress() {
+		return hotelAddress;
+	}
+
+	public void setHotelAddress(String hotelAddress) {
+		this.hotelAddress = hotelAddress;
 	}
 
 	
 
-	public List<Room> getRoom() {
-		return room;
-	}
-
-	public void setRoom(List<Room> room) {
-		this.room = room;
-	}
-
-	public HotelInformation getHotelInfo() {
-		return hotelInfo;
-	}
-
-	public void setHotelInfo(HotelInformation hotelInfo) {
-		this.hotelInfo = hotelInfo;
-	}
-
-	
-
-	public Hotel(long hotelId, String hotelName, Owner owner, float rating, Customer customer, Admin admin,
-			List<Room> room, HotelInformation hotelInfo) {
+	public Hotel(long hotelId, String hotelName, float rating, Customer customer,
+			List<Room> rooms, String contactNumber, String hotelEmail, String hotelAddress) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;
-		this.owner = owner;
 		this.rating = rating;
 		this.customer = customer;
-		this.admin = admin;
-		this.room = room;
-		this.hotelInfo = hotelInfo;
+		this.rooms = rooms;
+		this.contactNumber = contactNumber;
+		this.hotelEmail = hotelEmail;
+		this.hotelAddress = hotelAddress;
 	}
 
 	public Hotel() {
@@ -128,8 +129,9 @@ public class Hotel {
 
 	@Override
 	public String toString() {
-		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", owner=" + owner + ", rating=" + rating
-				+ ", customer=" + customer + ", admin=" + admin + ", room=" + room + ", hotelInfo=" + hotelInfo + "]";
+		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", rating=" + rating + ", owner="
+				+ ", customer=" + customer + ", admin=" + ", rooms=" + rooms + ", contactNumber="
+				+ contactNumber + ", hotelEmail=" + hotelEmail + ", hotelAddress=" + hotelAddress + "]";
 	}
 
 	

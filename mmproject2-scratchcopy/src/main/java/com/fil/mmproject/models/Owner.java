@@ -1,5 +1,7 @@
 package com.fil.mmproject.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,18 +13,22 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Owner{
-	
+public class Owner {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long ownerId;
+
 	private String ownerName;
+
 	private String ownerEmail;
-	
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "owner")
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "owner")
+	@JsonIgnore
 	private Hotel hotel;
-	
-	@OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Admin admin;
 
 	public long getOwnerId() {
@@ -49,8 +55,6 @@ public class Owner{
 		this.ownerEmail = ownerEmail;
 	}
 
-	
-	
 	public Hotel getHotel() {
 		return hotel;
 	}
@@ -59,19 +63,12 @@ public class Owner{
 		this.hotel = hotel;
 	}
 
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	public Owner(long ownerId, String ownerName, String ownerEmail) {
+	public Owner(long ownerId, String ownerName, String ownerEmail, Hotel hotel) {
 		super();
 		this.ownerId = ownerId;
 		this.ownerName = ownerName;
 		this.ownerEmail = ownerEmail;
+		this.hotel = hotel;
 	}
 
 	public Owner() {
@@ -81,9 +78,8 @@ public class Owner{
 
 	@Override
 	public String toString() {
-		return "Owner [ownerId=" + ownerId + ", ownerName=" + ownerName + ", ownerEmail=" + ownerEmail + "]";
+		return "Owner [ownerId=" + ownerId + ", ownerName=" + ownerName + ", ownerEmail=" + ownerEmail + ", hotel="
+				+ hotel + "]";
 	}
-	
-	
 
 }

@@ -2,12 +2,15 @@ package com.fil.mmproject.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -20,20 +23,25 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long reservationId;
+
 	private String bookingStatus;
+
 	private String checkInDate;
+
 	private String checkOutDate;
 
-	@OneToMany(fetch = FetchType.LAZY ,cascade = CascadeType.ALL ,mappedBy = "reservation")
-	private List<Room> room;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "reservation")
+	@JsonIgnore
+	private List<Room> rooms;
 
-	@ManyToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "customerId")
+	@JsonIgnore
 	private Customer customer;
 
-	@OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL ,mappedBy = "reservation")
-	private Payment payment;
-
-	@OneToOne(fetch = FetchType.LAZY ,cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "adminId")
+	@JsonIgnore
 	private Admin admin;
 
 	public String getBookingStatus() {
@@ -76,23 +84,6 @@ public class Reservation {
 		this.admin = admin;
 	}
 
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
-	
-
-	public List<Room> getRoom() {
-		return room;
-	}
-
-	public void setRoom(List<Room> room) {
-		this.room = room;
-	}
-
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -101,30 +92,35 @@ public class Reservation {
 		this.customer = customer;
 	}
 
-
-	public Reservation(long reservationId, String bookingStatus, String checkInDate, String checkOutDate,
-			List<Room> room, Customer customer, Payment payment, Admin admin) {
-		super();
-		this.reservationId = reservationId;
-		this.bookingStatus = bookingStatus;
-		this.checkInDate = checkInDate;
-		this.checkOutDate = checkOutDate;
-		this.room = room;
-		this.customer = customer;
-		this.payment = payment;
-		this.admin = admin;
-	}
-
 	public Reservation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
+	public Reservation(long reservationId, String bookingStatus, String checkInDate, String checkOutDate,
+			List<Room> rooms, Customer customer, Admin admin) {
+		super();
+		this.reservationId = reservationId;
+		this.bookingStatus = bookingStatus;
+		this.checkInDate = checkInDate;
+		this.checkOutDate = checkOutDate;
+		this.rooms = rooms;
+		this.customer = customer;
+		this.admin = admin;
+	}
+
+	public List<Room> getRooms() {
+		return rooms;
+	}
+
+	public void setRooms(List<Room> rooms) {
+		this.rooms = rooms;
+	}
+
 	@Override
 	public String toString() {
 		return "Reservation [reservationId=" + reservationId + ", bookingStatus=" + bookingStatus + ", checkInDate="
-				+ checkInDate + ", checkOutDate=" + checkOutDate + ", room=" + room + ", customer=" + customer
-				+ ", payment=" + payment + ", admin=" + admin + "]";
+				+ checkInDate + ", checkOutDate=" + checkOutDate + ", rooms=" + rooms + ", customer=" + customer
+				+ ", admin=" + admin + "]";
 	}
-	
 }
