@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Rooms</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Available Rooms</h1>
+        <h2>Hotel Name</h2>
+        <form action="reserve" method="get" class="mb-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Room Number</th>
+                        <th>Room Type</th>
+                        <th>Room Price</th>
+                        <th>Select</th> <!-- Add a Select column -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate through the list of rooms for the selected hotel and display their details -->
+                    <tr th:each="room : ${rooms}">
+                        <td th:text="${room.roomNumber}">Room Number</td>
+                        <td th:text="${room.roomType}">Room Type</td>
+                        <td th:text="${room.price}">Price</td>
+                        <td>
+                            <!-- Add a checkbox to select the room -->
+                            <input type="checkbox" name="selectedRooms" th:value="${room.roomId}" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Select</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
