@@ -5,33 +5,40 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
 public class Hotel {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long hotelId;
+	@Column(length = 10, nullable = false)
 	private String hotelName;
+	@Column
+	private float rating;
 
 	@OneToOne
 	private Owner owner;
-	private float rating;
 
 	@ManyToOne
+	@JoinColumn
 	private Customer customer;
 
 	@OneToOne
 	private Admin admin;
 
-	@OneToMany(mappedBy = "hotel")
+	@OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Room> rooms;
 
 	@OneToOne
@@ -116,5 +123,4 @@ public class Hotel {
 				+ ", customer=" + customer + ", admin=" + admin + ", rooms=" + rooms + "]";
 	}
 
-	
 }
