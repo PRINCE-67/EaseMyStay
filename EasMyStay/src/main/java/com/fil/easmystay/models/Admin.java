@@ -1,81 +1,104 @@
 package com.fil.easmystay.models;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.OneToMany;
 
 @Entity
-@Table
-public class Admin { 
-	
+public class Admin {
+
 	@Id
-	private int adminId;
-	
-	@OneToOne
-	private Hotel hotel;
-	
-	@OneToOne
-	private Owner owner;
-	
-	@OneToOne
-	private Customer customer;
-	
-	@OneToOne
-    private Reservation reservation;
-	
-    
-    
-	public int getAdminId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long adminId;
+	@Column(length = 50, nullable = false)
+	private String adminFirstname;
+	@Column(length = 50, nullable = false)
+	private String adminLastname;
+
+	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Hotel> hotel;
+
+	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Owner> owner;
+
+	@OneToMany(mappedBy = "admin", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Customer> customer;
+
+	public long getAdminId() {
 		return adminId;
 	}
-	public void setAdminId(int adminId) {
+
+	public void setAdminId(long adminId) {
 		this.adminId = adminId;
 	}
-	public Reservation getReservation() {
-		return reservation;
+
+	public String getAdminFirstname() {
+		return adminFirstname;
 	}
-	public void setReservation(Reservation reservation) {
-		this.reservation = reservation;
+
+	public void setAdminFirstname(String adminFirstname) {
+		this.adminFirstname = adminFirstname;
 	}
-	public Hotel getHotel() {
+
+	public String getAdminLastname() {
+		return adminLastname;
+	}
+
+	public void setAdminLastname(String adminLastname) {
+		this.adminLastname = adminLastname;
+	}
+
+	public List<Hotel> getHotel() {
 		return hotel;
 	}
-	public void setHotel(Hotel hotel) {
+
+	public void setHotel(List<Hotel> hotel) {
 		this.hotel = hotel;
 	}
-	public Owner getOwner() {
+
+	public List<Owner> getOwner() {
 		return owner;
 	}
-	public void setOwner(Owner owner) {
+
+	public void setOwner(List<Owner> owner) {
 		this.owner = owner;
 	}
-	public Customer getCustomer() {
+
+	public List<Customer> getCustomer() {
 		return customer;
 	}
-	public void setCustomer(Customer customer) {
+
+	public void setCustomer(List<Customer> customer) {
 		this.customer = customer;
 	}
-    
-	public Admin(int adminId, Hotel hotel, Owner owner, Customer customer, Reservation reservation) {
+
+	public Admin(long adminId, String adminFirstname, String adminLastname, List<Hotel> hotel, List<Owner> owner,
+			List<Customer> customer) {
 		super();
 		this.adminId = adminId;
+		this.adminFirstname = adminFirstname;
+		this.adminLastname = adminLastname;
 		this.hotel = hotel;
 		this.owner = owner;
 		this.customer = customer;
-		this.reservation = reservation;
 	}
+
 	public Admin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", hotel=" + hotel + ", owner=" + owner + ", customer=" + customer
-				+ ", reservation=" + reservation + "]";
+		return "Admin [adminId=" + adminId + ", adminFirstname=" + adminFirstname + ", adminLastname=" + adminLastname
+				+ ", hotel=" + hotel + ", owner=" + owner + ", customer=" + customer +"]";
 	}
-	
-	
-	
 
 }

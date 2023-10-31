@@ -2,32 +2,45 @@ package com.fil.easmystay.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fil.easmystay.repository.AdminRepo;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
-@Table
 public class Customer {
-	
+
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long customerId;
+	@Column(nullable = false)
 	private String customerName;
-	private long  customerPhoneNum;
+	@Column(nullable = false)
+	private long customerPhoneNum;
+	@Column
 	private String customerEmail;
-	
-	@OneToMany(mappedBy = "customer" )
-	private List<Reservation> reservation;
-	
-	@OneToMany(mappedBy = "customer" )
-	private List<Hotel> hotels;
-	
-	@OneToOne
+
+	@ManyToOne
+	@JoinColumn
 	private Admin admin;
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Reservation> reservations;
+
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Hotel> hotels;
 
 	public String getCustomerName() {
 		return customerName;
@@ -70,11 +83,11 @@ public class Customer {
 	}
 
 	public List<Reservation> getReservation() {
-		return reservation;
+		return reservations;
 	}
 
 	public void setReservation(List<Reservation> reservation) {
-		this.reservation = reservation;
+		this.reservations = reservation;
 	}
 
 	public List<Hotel> getHotels() {
@@ -85,15 +98,14 @@ public class Customer {
 		this.hotels = hotels;
 	}
 
-	
 	public Customer(long customerId, String customerName, long customerPhoneNum, String customerEmail,
-			List<Reservation> reservation, List<Hotel> hotels, Admin admin) {
+			List<Reservation> reservations, List<Hotel> hotels, Admin admin) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
 		this.customerPhoneNum = customerPhoneNum;
 		this.customerEmail = customerEmail;
-		this.reservation = reservation;
+		this.reservations = reservations;
 		this.hotels = hotels;
 		this.admin = admin;
 	}
@@ -106,12 +118,8 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPhoneNum="
-				+ customerPhoneNum + ", customerEmail=" + customerEmail + ", reservation=" + reservation + ", hotels="
+				+ customerPhoneNum + ", customerEmail=" + customerEmail + ", reservations=" + reservations + ", hotels="
 				+ hotels + ", admin=" + admin + "]";
 	}
-	
-	
-	
-	
 
 }

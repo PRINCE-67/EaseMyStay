@@ -2,36 +2,45 @@ package com.fil.easmystay.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
-@Table
 public class Reservation {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long reservationId;
+	@Column
 	private String bookingStatus;
+	@Column
 	private String checkInDate;
+	@Column
 	private String checkOutDate;
 
-	@OneToMany(mappedBy = "reservation")
+	@OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Room> rooms;
 
 	@ManyToOne
+	@JoinColumn
 	private Customer customer;
 
 	@OneToOne
 	private Payment payment;
 
-	@OneToOne
-	private Admin admin;
 
 	public String getBookingStatus() {
 		return bookingStatus;
@@ -64,15 +73,6 @@ public class Reservation {
 	public void setCheckOutDate(String checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
 	public Payment getPayment() {
 		return payment;
 	}
@@ -95,7 +95,7 @@ public class Reservation {
 	}
 
 	public Reservation(long reservationId, String bookingStatus, String checkInDate, String checkOutDate,
-			List<Room> rooms, Customer customer, Payment payment, Admin admin) {
+			List<Room> rooms, Customer customer, Payment payment) {
 		super();
 		this.reservationId = reservationId;
 		this.bookingStatus = bookingStatus;
@@ -104,7 +104,6 @@ public class Reservation {
 		this.rooms = rooms;
 		this.customer = customer;
 		this.payment = payment;
-		this.admin = admin;
 	}
 
 	public List<Room> getRooms() {
@@ -119,6 +118,6 @@ public class Reservation {
 	public String toString() {
 		return "Reservation [reservationId=" + reservationId + ", bookingStatus=" + bookingStatus + ", checkInDate="
 				+ checkInDate + ", checkOutDate=" + checkOutDate + ", rooms=" + rooms + ", customer=" + customer
-				+ ", payment=" + payment + ", admin=" + admin + "]";
+				+ ", payment=" + payment + "]";
 	}
 }
