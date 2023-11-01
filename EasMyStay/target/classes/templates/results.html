@@ -5,10 +5,13 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
-    <div class="container mt-5">
+<body style="background-image: url('https://wallpapers.com/images/high/hotel-background-cwnsftiii6cq0bgl.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;">
+    <div class="container mt-5" style="background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 5px;">
         <h1 class="mb-4">Search Hotels</h1>
-        <form action="available" method="get" class="mb-4">
+        <form th:action="available" method="get" class="mb-4">
             <table class="table">
                 <thead>
                     <tr>
@@ -22,9 +25,9 @@
                 </thead>
                 <tbody>
                     <!-- Iterate through the list of hotels and display their details -->
-                    <tr th:each="hotel, status : ${hotels}">
+                    <tr th:each="hotel : ${hotels}">
                         <td>
-                            <input type="checkbox" name="selectedHotels" th:value="${hotel.hotelId}" />
+                            <input type="radio" name="selectedHotels" th:value="${hotel.hotelId}" />
                         </td>
                         <td th:text="${hotel.hotelName}">Hotel Name</td>
                         <td th:text="${hotel.rating}">Rating</td>
