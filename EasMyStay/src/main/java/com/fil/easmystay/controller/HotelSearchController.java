@@ -29,11 +29,37 @@ public class HotelSearchController {
 		return hotelSearchService.getAllHotelSearches();
 	}
 
-	@GetMapping("/searchHotels")
+	@GetMapping("/homepage")
 	public String showSearchPage(Model model) {
 		model.addAttribute("hotelSearch", new HotelSearch());
-		return "search";
+		return "homepage";
 	}
+	
+	@GetMapping("/login")
+	public String showIndexPage(Model model) {
+		model.addAttribute("hotelSearch", new HotelSearch());
+		return "login";
+	}
+	
+	@GetMapping("/homepage2")
+	public String showNewPage(Model model) {
+		model.addAttribute("hotelSearch", new HotelSearch());
+		return "homepage2";
+	}
+	
+	@GetMapping("/signup")
+	public String showNewUserPage(Model model) {
+		model.addAttribute("hotelSearch", new HotelSearch());
+		return "signup";
+	}
+	
+//	@GetMapping("/update")
+//	public String showUpdatePage(Model model) {
+//		model.addAttribute("hotelSearch", new HotelSearch());
+//		return "update";
+//	}
+	
+	
 
 	@GetMapping("/results")
 //    public String showResultPage(@RequestParam("state") String state, @RequestParam("suburb") String suburb, @RequestParam("postcode") String postcode, Model model) {
@@ -55,15 +81,15 @@ public class HotelSearchController {
 		return "reserve";
 	}
 
-	@GetMapping("/hotelSearch")
-	public String searchHotels(@ModelAttribute HotelSearch hotelSearch, Model model) {
-		// Perform the search using HotelSearchService and populate the searchResults
-		List<Hotel> searchResults = hotelSearchService.searchHotels(hotelSearch);
-
-		model.addAttribute("searchResults", searchResults);
-
-		return "search"; // Return the same page to display search results changes i have made
-	}
+//	@GetMapping("/hotelSearch")
+//	public String searchHotels(@ModelAttribute HotelSearch hotelSearch, Model model) {
+//		// Perform the search using HotelSearchService and populate the searchResults
+//		List<Hotel> searchResults = hotelSearchService.searchHotels(hotelSearch);
+//
+//		model.addAttribute("searchResults", searchResults);
+//
+//		return "search"; // Return the same page to display search results changes i have made
+//	}
 
 	@GetMapping("/{id}")
 	public HotelSearch getHotelSearchById(@PathVariable long id) {
