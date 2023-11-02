@@ -11,6 +11,7 @@ import com.fil.easmystay.repository.OwnerRepo;
 @Service
 public class OwnerServiceImpl implements OwnerService {
 
+	@Autowired
 	private OwnerRepo ownerRepository;
 
 	@Override

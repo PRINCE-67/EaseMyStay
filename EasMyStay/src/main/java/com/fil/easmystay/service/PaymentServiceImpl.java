@@ -11,6 +11,7 @@ import com.fil.easmystay.repository.PaymentRepo;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
+	@Autowired
 	private PaymentRepo paymentRepository;
 
 	@Override
