@@ -182,9 +182,6 @@ public class AdminServiceImpl implements AdminService {
 			// Perform the update by copying attributes from the updatedAdmin object
 			existingAdmin.setAdminFirstname(updatedAdmin.getAdminFirstname());
 			existingAdmin.setAdminLastname(updatedAdmin.getAdminLastname());
-			existingAdmin.setHotel(updatedAdmin.getHotel());
-			existingAdmin.setOwner(updatedAdmin.getOwner());
-			existingAdmin.setCustomer(updatedAdmin.getCustomer());
 
 			// Save the updated admin back to the database
 			Admin savedAdmin = adminDao.save(existingAdmin);

@@ -12,9 +12,10 @@ import java.util.List;
 @RequestMapping("/reservations")
 public class ReservationController {
 
+	@Autowired
 	private ReservationService reservationService;
 
-	@PostMapping
+	@PostMapping("/createReservation")
 	public Reservation createReservation(@RequestBody Reservation reservation) {
 		return reservationService.createReservation(reservation);
 	}
@@ -28,7 +29,7 @@ public class ReservationController {
 		return reservation;
 	}
 
-	@GetMapping
+	@GetMapping("/getAllReservations")
 	public List<Reservation> getAllReservations() {
 		return reservationService.getAllReservations();
 	}
