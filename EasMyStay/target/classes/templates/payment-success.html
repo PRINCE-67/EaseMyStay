@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Payment Success</title>
+    <style>
+        body {
+            background-image: url('https://cdn.dribbble.com/users/1735807/screenshots/4290582/03.gif'); /* Replace 'your-image-url.jpg' with the image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            color: #333; /* Text color */
+            margin: 0; /* Remove default margin */
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* 100% viewport height */
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background for content */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 400px; /* Set maximum width to limit content size */
+            text-align: center; /* Center text content */
+        }
+        .container h1 {
+            color: #007bff; /* Blue color for the title */
+        }
+    </style>
 </head>
 <body>
-    <h1>Payment Successful</h1>
-    <p>Your payment has been processed successfully.</p>
+    <div class="container">
+        <h1>Payment Successful</h1>
+        <p>Your payment has been processed successfully.</p>
+        
+        <!-- Display the reservation details from the model -->
+      
+        <h2>Status:"Done" </h2>
+        
+        <!-- Add more details as needed -->
+    </div>
 </body>
 </html>
