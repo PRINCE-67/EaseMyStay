@@ -32,6 +32,7 @@ public class Customer {
 	@Column
 	private String customerEmail;
 
+	private String customerPassword;
 	@ManyToOne
 	@JoinColumn
 	private Admin admin;
@@ -98,16 +99,25 @@ public class Customer {
 		this.hotels = hotels;
 	}
 
+	public String getCustomerPassword() {
+		return customerPassword;
+	}
+
+	public void setCustomerPassword(String customerPassword) {
+		this.customerPassword = customerPassword;
+	}
+
 	public Customer(long customerId, String customerName, long customerPhoneNum, String customerEmail,
-			List<Reservation> reservations, List<Hotel> hotels, Admin admin) {
+			String customerPassword, Admin admin, List<Reservation> reservations, List<Hotel> hotels) {
 		super();
 		this.customerId = customerId;
 		this.customerName = customerName;
 		this.customerPhoneNum = customerPhoneNum;
 		this.customerEmail = customerEmail;
+		this.customerPassword = customerPassword;
+		this.admin = admin;
 		this.reservations = reservations;
 		this.hotels = hotels;
-		this.admin = admin;
 	}
 
 	public Customer() {
@@ -118,8 +128,9 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPhoneNum="
-				+ customerPhoneNum + ", customerEmail=" + customerEmail + ", reservations=" + reservations + ", hotels="
-				+ hotels + ", admin=" + admin + "]";
+				+ customerPhoneNum + ", customerEmail=" + customerEmail + ", customerPassword=" + customerPassword
+				+ ", admin=" + admin + ", reservations=" + reservations + ", hotels=" + hotels + "]";
 	}
+
 
 }

@@ -20,6 +20,7 @@ public class Owner {
 	@Column
 	private String ownerEmail;
 
+	private String ownerPassword;
 	@OneToOne
 	private Hotel hotel;
 	@ManyToOne
@@ -58,12 +59,22 @@ public class Owner {
 		this.hotel = hotel;
 	}
 
-	public Owner(long ownerId, String ownerName, String ownerEmail, Hotel hotel) {
+	public String getOwnerPassword() {
+		return ownerPassword;
+	}
+
+	public void setOwnerPassword(String ownerPassword) {
+		this.ownerPassword = ownerPassword;
+	}
+
+	public Owner(long ownerId, String ownerName, String ownerEmail, String ownerPassword, Hotel hotel, Admin admin) {
 		super();
 		this.ownerId = ownerId;
 		this.ownerName = ownerName;
 		this.ownerEmail = ownerEmail;
+		this.ownerPassword = ownerPassword;
 		this.hotel = hotel;
+		this.admin = admin;
 	}
 
 	public Owner() {
@@ -73,8 +84,8 @@ public class Owner {
 
 	@Override
 	public String toString() {
-		return "Owner [ownerId=" + ownerId + ", ownerName=" + ownerName + ", ownerEmail=" + ownerEmail + ", hotel="
-				+ hotel + "]";
+		return "Owner [ownerId=" + ownerId + ", ownerName=" + ownerName + ", ownerEmail=" + ownerEmail
+				+ ", ownerPassword=" + ownerPassword + ", hotel=" + hotel + ", admin=" + admin + "]";
 	}
 
 }
