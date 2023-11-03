@@ -17,12 +17,12 @@ public class RoomsController {
         this.roomService = roomService;
     }
 
-    @GetMapping("/available")
-    public String showAvailableRooms(Model model) {
-        // Add logic to retrieve available rooms and add them to the model
-        // Example:
-        model.addAttribute("rooms", roomService.getRooms());
-        return "available";
-    }
+//    @GetMapping("/available")
+//    public String showAvailableRooms(Model model) {
+//        // Add logic to retrieve available rooms and add them to the model
+//        // Example:
+//        model.addAttribute("rooms", roomService.getRooms());
+//        return "available";
+//    }
 }
 

@@ -36,7 +36,7 @@
                 <tbody>
                     <!-- Iterate through the list of rooms for the selected hotel and display their details -->
                     <tr th:each="room : ${rooms}">
-                        <td th:text="${room.roomNumber}">Room Number</td>
+                        <td th:text="${room.roomNum}">Room Number</td>
                         <td th:text="${room.roomType}">Room Type</td>
                         <td th:text="${room.price}">Price</td>
                         <td>

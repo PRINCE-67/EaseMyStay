@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Payment Details</title>
+	<!-- Include Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!-- Include Bootstrap Datepicker CSS -->
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+	<style>
+		body {
+			background-image: url('https://wallpaperaccess.com/full/4597155.jpg');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+			font-family: Arial, sans-serif;
+			color: #333;
+			margin: 0;
+			/* Remove default margin */
+			display: flex;
+			justify-content: center;
+			/* Center horizontally */
+			align-items: center;
+			/* Center vertically */
+			height: 100vh;
+			/* 100% viewport height */
+		}
+
+		.container {
+			background-color: rgba(255, 255, 255, 0.8);
+			border-radius: 10px;
+			padding: 20px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+			max-width: 400px;
+			/* Set maximum width to limit form size */
+		}
+
+		.container h1 {
+			text-align: center;
+			color: #007bff;
+			/* Blue color for the title */
+		}
+
+		.form-group {
+			margin: 10px 0;
+		}
+
+		label {
+			font-weight: bold;
+		}
+
+		.btn-primary {
+			background-color: #007bff;
+			border-color: #007bff;
+		}
+
+		.btn-primary:hover {
+			background-color: #0056b3;
+			border-color: #0056b3;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container mt-5">
+		<h1 class="mb-4">Payment Details</h1>
+		<form method="post" action="/payment">
+			<div class="form-group">
+				<label for="cardHolderName">Card Holder Name:</label>
+				<input type="text" class="form-control" id="cardHolderName" name="cardHolderName" required>
+			</div>
+			<div class="form-group">
+				<label for="cardNumber">Card Number:</label>
+				<input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+			</div>
+			<div class="form-group">
+				<label for="expirationDate">Expiration Date:</label>
+				<div class="input-group date" data-provide="datepicker">
+					<input type="text" class="form-control" id="expirationDate" name="expirationDate" required>
+					<div class="input-group-addon">
+						<span class="glyphicon glyphicon-th"></span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cvv">CVV:</label>
+				<input type="text" class="form-control" id="cvv" name="cvv" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit Payment</button>
+		</form>
+	</div>
+
+	<!-- Include Bootstrap JS and jQuery (if needed) -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<!-- Include Bootstrap Datepicker JS -->
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+	<script>
+		// Initialize the datepicker
+		$('#expirationDate').datepicker({
+			format: 'mm/dd/yyyy',
+			todayHighlight: true,
+			autoclose: true
+		});
+	</script>
+</body>
+
+</html>
