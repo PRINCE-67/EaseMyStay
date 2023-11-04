@@ -26,17 +26,34 @@ public class RegisterController {
     @GetMapping("/signup")
     public String showRegistrationPage(Model model) {
         model.addAttribute("customer", new Customer());
-        model.addAttribute("owner", new Owner());
+//        model.addAttribute("owner", new Owner());
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String register(Customer customer, Owner owner) {
+    public String register(Customer customer) {
         if (customer != null) {
             customerService.createCustomer(customer);
-        } else if (owner != null) {
-            ownerService.createOwner(owner);
-        }
+        } //else if (owner != null) {
+//            ownerService.createOwner(owner);
+//        }
         return "redirect:/login"; // Redirect to the login page
+    }
+    
+    @GetMapping("/signupo")
+    public String showRegistrationoPage(Model model) {
+//        model.addAttribute("customer", new Customer());
+        model.addAttribute("owner", new Owner());
+        return "signupo";
+    }
+
+    @PostMapping("/signupo")
+    public String registero(Owner owner) {
+        if (owner != null) {
+            ownerService.createOwner(owner);
+        } //else if (owner != null) {
+//            ownerService.createOwner(owner);
+//        }
+        return "redirect:/logino"; // Redirect to the logino page
     }
 }

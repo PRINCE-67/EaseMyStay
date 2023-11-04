@@ -11,6 +11,7 @@ import com.fil.easmystay.repository.OwnerRepo;
 @Service
 public class OwnerServiceImpl implements OwnerService {
 
+	@Autowired
 	private OwnerRepo ownerRepository;
 
 	@Override
@@ -40,8 +41,8 @@ public class OwnerServiceImpl implements OwnerService {
 	@Override
 	public Owner createOwner(Owner owner) {
 		// TODO Auto-generated method stub
-		ownerRepository.save(owner);
-		return owner;
+		return ownerRepository.save(owner);
+		
 	}
 
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>New Customer Registration</title>
+    <title>New Owner Registration</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS for background image -->
@@ -21,27 +21,27 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">New Customer Registration</h1>
-        <form th:action="@{/signup}" method="post" th:object="${user}">
+        <h1 class="mb-4">New Owner Registration</h1>
+        <form th:action="@{/signupo}" method="post" th:object="${user}">
     <div class="form-group">
-        <label for="customerId">Customer ID:</label>
-        <input type="text" id="customerId" name="customerId" class="form-control" required>
+        <label for="ownerId">Owner ID:</label>
+        <input type="text" id="ownerId" name="ownerId" class="form-control" required>
     </div>
     <div class="form-group">
-        <label for="customerName">Customer Name:</label>
-        <input type="text" id="customerName" name="customerName" class="form-control" required>
+        <label for="ownerName">Owner Name:</label>
+        <input type="text" id="ownerName" name="ownerName" class="form-control" required>
+    </div>
+    <!--<div class="form-group">
+        <label for="ownerPhoneNum">Phone Number:</label>
+        <input type="text" id="ownerPhoneNum" name="ownerPhoneNum" class="form-control" required>
+    </div>-->
+    <div class="form-group">
+        <label for="ownerEmail">Email:</label>
+        <input type="email" id="ownerEmail" name="ownerEmail" class="form-control" required>
     </div>
     <div class="form-group">
-        <label for="customerPhoneNum">Phone Number:</label>
-        <input type="text" id="customerPhoneNum" name="customerPhoneNum" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="customerEmail">Email:</label>
-        <input type="email" id="customerEmail" name="customerEmail" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="customerPassword">Password:</label>
-        <input type="password" id="customerPassword" name="customerPassword" class="form-control" required>
+        <label for="ownerPassword">Password:</label>
+        <input type="password" id="ownerPassword" name="ownerPassword" class="form-control" required>
     </div>
     <!--<div class="form-group">
         <label>Select User Type:</label>

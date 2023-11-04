@@ -15,7 +15,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HotelRoomController {
 
+
 	
+    public HotelRoomController(HotelService hotelService) {
+        this.hotelService = hotelService;
+    }
+    @Autowired
+    public HotelRoomController(RoomService roomService) {
+        this.roomService = roomService;
+    }
+    
 	private Hotel selectedHotel;
     private Room selectedRoom;
     
@@ -37,14 +46,50 @@ public class HotelRoomController {
     }
 
     
-    @GetMapping("/reserve")
-    public String showSelectedRoom(Model model) {
-        // Add logic to retrieve the selected hotel and room
-        // Example:
-        model.addAttribute("selectedHotel",hotelService.getHotels());
-        model.addAttribute("selectedRoom", roomService.getRooms());
-        return "reserve";
+
+    @GetMapping("/photel")
+    public String showHotelRegistrationForm(Model model) {
+        model.addAttribute("hotel", new Hotel());
+        return "photel"; // Thymeleaf template name for the registration page
     }
+
+    @PostMapping("/photel")
+    public String registerHotel(Hotel hotel) {
+        // Implement the logic to save the hotel details to the database using the hotelService
+        hotelService.createHotel(hotel);
+
+        // After successful registration, you can redirect to the "proom" page
+        return "redirect:/proom";
+    }
+    
+    @GetMapping("/proom")
+    public String showRoomRegistrationPage(Model model) {
+        model.addAttribute("room", new Room());
+        return "proom";
+    }
+
+    @PostMapping("/proom")
+    public String registerRoom(Room room) {
+        // Add logic to save the room details to the database
+        roomService.createRoom(room);
+
+        // Redirect to a success page
+        return "redirect:/last";
+    }
+
+    @GetMapping("/last")
+    public String showRegistrationSuccessPage() {
+        return "last";
+    }
+    
+//    @GetMapping("/reserve")
+//    public String showSelectedRoom(Model model) {
+//        // Add logic to retrieve the selected hotel and room
+//        // Example:
+//        model.addAttribute("selectedHotel",hotelService.getHotels());
+//        model.addAttribute("selectedRoom", roomService.getRooms());
+//        return "reserve";
+//    }
     
 //    @GetMapping("/reserve/{roomId}")
 //    public String showSelectedRoom(@RequestParam("roomId") int roomId, Model model) {
@@ -62,10 +107,10 @@ public class HotelRoomController {
 //        return "reserve";
 //    }
 
-    @PostMapping("/reserve")
-    public String reserveRoom(Model model) {
-        // Add logic to handle room reservation
-        return "reservation-success"; // Show a success page
-    }
+//    @PostMapping("/reserve")
+//    public String reserveRoom(Model model) {
+//        // Add logic to handle room reservation
+//        return "reservation-success"; // Show a success page
+//    }
    
 }

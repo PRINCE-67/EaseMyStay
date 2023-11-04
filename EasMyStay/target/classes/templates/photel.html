@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Hotel Registration</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS for background image -->
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1596436889106-be35e843f974?auto=format&fit=crop&q=80&w=2070&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Hotel Registration</h1>
+        <form th:action="@{/photel}" method="post" th:object="${hotel}">
+            <div class="form-group">
+                <label for="hotelId">Hotel ID:</label>
+                <input type="text" id="hotelId" name="hotelId" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="hotelName">Hotel Name:</label>
+                <input type="text" id="hotelName" name="hotelName" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register Hotel</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

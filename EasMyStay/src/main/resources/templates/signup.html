@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>New User Registration</title>
+    <title>New Customer Registration</title>
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS for background image -->
@@ -21,7 +21,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1 class="mb-4">New User Registration</h1>
+        <h1 class="mb-4">New Customer Registration</h1>
         <form th:action="@{/signup}" method="post" th:object="${user}">
     <div class="form-group">
         <label for="customerId">Customer ID:</label>
@@ -43,11 +43,11 @@
         <label for="customerPassword">Password:</label>
         <input type="password" id="customerPassword" name="customerPassword" class="form-control" required>
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
         <label>Select User Type:</label>
         <input type="radio" name="userType" value="customer" required> Customer
         <input type="radio" name="userType" value="owner" required> Owner
-    </div>
+    </div>-->
     <button type="submit" class="btn btn-primary">Register</button>
 </form>
     </div>

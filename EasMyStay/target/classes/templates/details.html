@@ -1,0 +1,52 @@
+<!--<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Owner Details</title>
+     Include Bootstrap CSS 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     Custom CSS for background image 
+    <style>
+        body {
+            background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&q=80&w=1780&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Owner Details</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Owner ID</th>
+                    <th>Owner Name</th>
+                    <th>Hotel Name</th>
+                    <th>Hotel ID</th>
+                </tr>
+            </thead>
+            <tbody>
+                 Iterate over owner details and display in a table 
+                <tr th:each="ownerDetail : ${ownerDetails}">
+                    <td th:text="${ownerDetail.ownerId}"></td>
+                    <td th:text="${ownerDetail.ownerName}"></td>
+                    <td th:text="${ownerDetail.hotelName}"></td>
+                    <td th:text="${ownerDetail.hotelId}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+     Include Bootstrap JS and jQuery (if needed) 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+-->

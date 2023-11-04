@@ -26,9 +26,24 @@ public class LoginController {
     @GetMapping("/login")
     public String showLoginPage(Model model) {
         model.addAttribute("customerLoginForm", new Customer());
-        model.addAttribute("ownerLoginForm", new Owner());
+       
         return "login";
     }
+    
+    @GetMapping("/logino")
+    public String showLoginoPage(Model model) {
+        
+        model.addAttribute("ownerLoginForm", new Owner());
+        return "logino";
+    }
+    
+//    @GetMapping("/details")
+//    public String showdetailsPage(Model model) {
+//        
+//        model.addAttribute("ownerDetailsForm", new Owner());
+//        return "details";
+//    }
+    
 
     @PostMapping("/login")
     public String login(Customer customerLoginForm, Owner ownerLoginForm, Model model) {
