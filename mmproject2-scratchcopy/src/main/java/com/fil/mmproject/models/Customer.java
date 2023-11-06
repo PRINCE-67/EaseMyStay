@@ -1,6 +1,7 @@
 package com.fil.mmproject.models;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,8 +15,18 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Table
 public class Customer {
 	
@@ -41,87 +52,25 @@ public class Customer {
 	@JsonIgnore
 	private Admin admin;
 
-	public String getCustomerName() {
-		return customerName;
-	}
-
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
-
-	public long getCustomerPhoneNum() {
-		return customerPhoneNum;
-	}
-
-	public void setCustomerPhoneNum(long customerPhoneNum) {
-		this.customerPhoneNum = customerPhoneNum;
-	}
-
-	public String getCustomerEmail() {
-		return customerEmail;
-	}
-
-	public void setCustomerEmail(String customerEmail) {
-		this.customerEmail = customerEmail;
-	}
-
-	public long getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(long customerId) {
-		this.customerId = customerId;
-	}
-
-	public List<Reservation> getReservation() {
-		return reservation;
-	}
-
-	public void setReservation(List<Reservation> reservation) {
-		this.reservation = reservation;
-	}
-
-	public List<Hotel> getHotels() {
-		return hotels;
-	}
-
-	public void setHotels(List<Hotel> hotels) {
-		this.hotels = hotels;
-	}
-
-	
-	
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	public Customer(long customerId, String customerName, long customerPhoneNum, String customerEmail,
-			List<Reservation> reservation, List<Hotel> hotels) {
-		super();
-		this.customerId = customerId;
-		this.customerName = customerName;
-		this.customerPhoneNum = customerPhoneNum;
-		this.customerEmail = customerEmail;
-		this.reservation = reservation;
-		this.hotels = hotels;
-	}
-
-	public Customer() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public int hashCode() {
+		return Objects.hash(admin, customerEmail, customerId, customerName, customerPhoneNum, hotels, reservation);
 	}
 
 	@Override
-	public String toString() {
-		return "Customer [customerId=" + customerId + ", customerName=" + customerName + ", customerPhoneNum="
-				+ customerPhoneNum + ", customerEmail=" + customerEmail + ", reservation=" + reservation + ", hotels="
-				+ hotels + ", admin=" + admin + "]";
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		return Objects.equals(admin, other.admin) && Objects.equals(customerEmail, other.customerEmail)
+				&& customerId == other.customerId && Objects.equals(customerName, other.customerName)
+				&& customerPhoneNum == other.customerPhoneNum && Objects.equals(hotels, other.hotels)
+				&& Objects.equals(reservation, other.reservation);
 	}
-	
 	
 	
 	

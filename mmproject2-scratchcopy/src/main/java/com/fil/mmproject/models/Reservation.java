@@ -1,6 +1,7 @@
 package com.fil.mmproject.models;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,8 +16,18 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Table
 public class Reservation {
 
@@ -44,83 +55,26 @@ public class Reservation {
 	@JsonIgnore
 	private Admin admin;
 
-	public String getBookingStatus() {
-		return bookingStatus;
-	}
-
-	public void setBookingStatus(String bookingStatus) {
-		this.bookingStatus = bookingStatus;
-	}
-
-	public long getReservationId() {
-		return reservationId;
-	}
-
-	public void setReservationId(long reservationId) {
-		this.reservationId = reservationId;
-	}
-
-	public String getCheckInDate() {
-		return checkInDate;
-	}
-
-	public void setCheckInDate(String checkInDate) {
-		this.checkInDate = checkInDate;
-	}
-
-	public String getCheckOutDate() {
-		return checkOutDate;
-	}
-
-	public void setCheckOutDate(String checkOutDate) {
-		this.checkOutDate = checkOutDate;
-	}
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public Reservation() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Reservation(long reservationId, String bookingStatus, String checkInDate, String checkOutDate,
-			List<Room> rooms, Customer customer, Admin admin) {
-		super();
-		this.reservationId = reservationId;
-		this.bookingStatus = bookingStatus;
-		this.checkInDate = checkInDate;
-		this.checkOutDate = checkOutDate;
-		this.rooms = rooms;
-		this.customer = customer;
-		this.admin = admin;
-	}
-
-	public List<Room> getRooms() {
-		return rooms;
-	}
-
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
+	@Override
+	public int hashCode() {
+		return Objects.hash(admin, bookingStatus, checkInDate, checkOutDate, customer, reservationId, rooms);
 	}
 
 	@Override
-	public String toString() {
-		return "Reservation [reservationId=" + reservationId + ", bookingStatus=" + bookingStatus + ", checkInDate="
-				+ checkInDate + ", checkOutDate=" + checkOutDate + ", rooms=" + rooms + ", customer=" + customer
-				+ ", admin=" + admin + "]";
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reservation other = (Reservation) obj;
+		return Objects.equals(admin, other.admin) && Objects.equals(bookingStatus, other.bookingStatus)
+				&& Objects.equals(checkInDate, other.checkInDate) && Objects.equals(checkOutDate, other.checkOutDate)
+				&& Objects.equals(customer, other.customer) && reservationId == other.reservationId
+				&& Objects.equals(rooms, other.rooms);
 	}
+	
+	
+	
 }

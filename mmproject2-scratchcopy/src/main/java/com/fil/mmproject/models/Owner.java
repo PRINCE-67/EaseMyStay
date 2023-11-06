@@ -1,5 +1,8 @@
 package com.fil.mmproject.models;
 
+import java.util.List;
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
@@ -10,8 +13,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Table
 public class Owner {
 
@@ -31,55 +44,25 @@ public class Owner {
 	@JsonIgnore
 	private Admin admin;
 
-	public long getOwnerId() {
-		return ownerId;
-	}
-
-	public void setOwnerId(long ownerId) {
-		this.ownerId = ownerId;
-	}
-
-	public String getOwnerName() {
-		return ownerName;
-	}
-
-	public void setOwnerName(String ownerName) {
-		this.ownerName = ownerName;
-	}
-
-	public String getOwnerEmail() {
-		return ownerEmail;
-	}
-
-	public void setOwnerEmail(String ownerEmail) {
-		this.ownerEmail = ownerEmail;
-	}
-
-	public Hotel getHotel() {
-		return hotel;
-	}
-
-	public void setHotel(Hotel hotel) {
-		this.hotel = hotel;
-	}
-
-	public Owner(long ownerId, String ownerName, String ownerEmail, Hotel hotel) {
-		super();
-		this.ownerId = ownerId;
-		this.ownerName = ownerName;
-		this.ownerEmail = ownerEmail;
-		this.hotel = hotel;
-	}
-
-	public Owner() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public int hashCode() {
+		return Objects.hash(admin, hotel, ownerEmail, ownerId, ownerName);
 	}
 
 	@Override
-	public String toString() {
-		return "Owner [ownerId=" + ownerId + ", ownerName=" + ownerName + ", ownerEmail=" + ownerEmail + ", hotel="
-				+ hotel + "]";
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Owner other = (Owner) obj;
+		return Objects.equals(admin, other.admin) && Objects.equals(hotel, other.hotel)
+				&& Objects.equals(ownerEmail, other.ownerEmail) && ownerId == other.ownerId
+				&& Objects.equals(ownerName, other.ownerName);
 	}
 
+	
+	
 }

@@ -1,6 +1,7 @@
 package com.fil.mmproject.models;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -14,8 +15,18 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Table
 public class Hotel {
 
@@ -42,122 +53,42 @@ public class Hotel {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Owner owner;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Availability availible;
 
 	private String contactNumber;
 	
 	private String hotelEmail;
 	
 	private String hotelAddress;
-	
-	
 
-	public long getHotelId() {
-		return hotelId;
-	}
-
-	public void setHotelId(long hotelId) {
-		this.hotelId = hotelId;
-	}
-
-	public String getHotelName() {
-		return hotelName;
-	}
-
-	public void setHotelName(String hotelName) {
-		this.hotelName = hotelName;
-	}
-
-	public float getRating() {
-		return rating;
-	}
-
-	public void setRating(float rating) {
-		this.rating = rating;
-	}
-
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-
-	public List<Room> getRooms() {
-		return rooms;
-	}
-
-	public void setRooms(List<Room> rooms) {
-		this.rooms = rooms;
-	}
-
-	public String getContactNumber() {
-		return contactNumber;
-	}
-
-	public void setContactNumber(String contactNumber) {
-		this.contactNumber = contactNumber;
-	}
-
-	public String getHotelEmail() {
-		return hotelEmail;
-	}
-
-	public void setHotelEmail(String hotelEmail) {
-		this.hotelEmail = hotelEmail;
-	}
-
-	public String getHotelAddress() {
-		return hotelAddress;
-	}
-
-	public void setHotelAddress(String hotelAddress) {
-		this.hotelAddress = hotelAddress;
-	}
-
-	
-
-	public Owner getOwner() {
-		return owner;
-	}
-
-	public void setOwner(Owner owner) {
-		this.owner = owner;
-	}
-
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
-	public Hotel(long hotelId, String hotelName, float rating, Customer customer,
-			List<Room> rooms, String contactNumber, String hotelEmail, String hotelAddress) {
-		super();
-		this.hotelId = hotelId;
-		this.hotelName = hotelName;
-		this.rating = rating;
-		this.customer = customer;
-		this.rooms = rooms;
-		this.contactNumber = contactNumber;
-		this.hotelEmail = hotelEmail;
-		this.hotelAddress = hotelAddress;
-	}
-
-	public Hotel() {
-		super();
-		// TODO Auto-generated constructor stub
+	@Override
+	public int hashCode() {
+		return Objects.hash(admin, availible, contactNumber, customer, hotelAddress, hotelEmail, hotelId, hotelName,
+				owner, rating, rooms);
 	}
 
 	@Override
-	public String toString() {
-		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", rating=" + rating + ", customer="
-				+ customer + ", rooms=" + rooms + ", admin=" + admin + ", owner=" + owner + ", contactNumber="
-				+ contactNumber + ", hotelEmail=" + hotelEmail + ", hotelAddress=" + hotelAddress + "]";
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Hotel other = (Hotel) obj;
+		return Objects.equals(admin, other.admin) && Objects.equals(availible, other.availible)
+				&& Objects.equals(contactNumber, other.contactNumber) && Objects.equals(customer, other.customer)
+				&& Objects.equals(hotelAddress, other.hotelAddress) && Objects.equals(hotelEmail, other.hotelEmail)
+				&& hotelId == other.hotelId && Objects.equals(hotelName, other.hotelName)
+				&& Objects.equals(owner, other.owner)
+				&& Float.floatToIntBits(rating) == Float.floatToIntBits(other.rating)
+				&& Objects.equals(rooms, other.rooms);
 	}
-
+	
+	
 	
 
 }

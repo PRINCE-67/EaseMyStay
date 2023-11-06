@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Hotels</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style="background-image: url('https://wallpapers.com/images/high/hotel-background-cwnsftiii6cq0bgl.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;">
+    <div class="container mt-5" style="background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 5px;">
+        <h1 class="mb-4">Search Hotels</h1>
+        <form th:action="available" method="get" class="mb-4">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Select</th>
+                        <th>Hotel Id</th>
+                        <th>Hotel Name</th>
+                        <th>Rating</th>
+                        <th>Contact Number</th>
+                        <th>Hotel Email</th>
+                        <th>Hotel Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate through the list of hotels and display their details -->
+                    <tr th:each="hotel : ${hotels}">
+                        <td>
+                            <input type="radio" name="selectedHotels" th:value="${hotel.hotelId}" />
+                        </td>
+                        <td th:text="${hotel.hotelName}">Hotel Name</td>
+                        <td th:text="${hotel.rating}">Rating</td>
+                        <td th:text="${hotel.hotelEmail}">Email</td>
+                        <td th:text="${hotel.hotelAddress}">Address</td>
+                        <td th:text="${hotel.contactNumber}">Contact Number</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Select</button>
+        </form>
+    </div>
+
+    <!-- Include Bootstrap JS and jQuery (if needed) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
